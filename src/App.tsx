@@ -1,12 +1,13 @@
 import './App.css'
 import Search from "./components/Search.tsx";
 import BackgroundVideo from "./components/BackgroundVideo.tsx";
-import ring2 from './assets/ring2.webm';
+//import ring2 from './assets/ring2.webm';
+import blade2 from './assets/blade2.mp4';
 
 function App() {
 
   return (
-      <BackgroundVideo src={ring2}>
+      <BackgroundVideo src={blade2}>
           <main>
               <Search></Search>
           </main>
