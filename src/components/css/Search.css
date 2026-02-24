@@ -1,0 +1,91 @@
+.search{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 90%;
+    padding: 10px 10px 10px 20px;
+    border-radius: 999px;
+    background: rgba(16, 16, 16, 0.75);
+    color: var(--search-color);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(60, 60, 60, 0.62);
+    box-shadow: inset -2px 2px 5px #000000,
+                inset 4px -4px 5px #555555;
+}
+
+.search input{
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 2rem;
+    padding: 0 1rem;
+    background: none;
+    color: var(--search-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+
+}
+
+.search-icon {
+    scale: 1.4;
+    margin-top: 2px;
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+.search input::selection {
+    background-color: var(--search-color);
+    color: #abaaaa;
+}
+
+.search .filter-btn {
+    padding: 16px 32px;
+    color: #838383;
+    background-color: rgba(24, 24, 24, 0.60);
+    outline: none;
+    font-size: 1.2rem;
+
+    cursor: pointer;
+    border-radius: 999px;
+    font-weight: bold;
+
+    border: 1px solid transparent;
+    box-shadow: inset -2px 2px 5px #555555,
+                inset 4px -4px 5px #000000;
+
+}
+
+.search .filter-btn{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+    position: relative;
+    padding-left: 46px;
+}
+
+.search .filter-btn:active, .search .filter-btn.open {
+
+    background-color: rgba(24, 24, 24, 0.0);
+    box-shadow: inset -2px 2px 5px #000000,
+    inset 4px -4px 5px #555555;
+    border: 1px solid rgba(60, 60, 60, 0.40);
+}
+
+.search .filter-btn svg{
+    color: #1565C0;
+    position: absolute;
+    top: 30%;
+    left: 20px;
+    scale: 1.2;
+}
+
+.search .filter-btn .glow{
+    scale: 1.4;
+    position: absolute;
+    top: 30%;
+    left: 20px;
+    opacity: 0.5;
+    filter: blur(1px);
+}
