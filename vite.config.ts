@@ -4,9 +4,10 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
     plugins: [react()],
+    base: '/resources/',
     server: {
         allowedHosts: [
-            'vcr-wheel-dictionary-thousands.trycloudflare.com'
+            'dj3d.me'
         ]
     }
 })
