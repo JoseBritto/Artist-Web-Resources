@@ -20,7 +20,30 @@ function App() {
       <BackgroundVideo src={videos[currentVideo]}>
           <main>
               <Search></Search>
-              <Card></Card>
+              <div className="cards">
+                  {Array.from({ length: 50 }, (_, i) => (
+                      <>
+                      <Card key={i + 'x'} url="https://rockstar.games" tags={[{
+                          text: "Melee",
+                          icon: "👊 "
+                      }, {
+                          text: "Ranged",
+                          icon: "🔫 "
+                      }
+                      ]} categoryIcon="🌿" categoryText="Here we go again" title="Rockstar North" pricing="Free 2 Play" />
+
+                      <Card key={i + 'y'} url="https://blender.org" tags={[{
+                      text: "Space",
+                      icon: "🚀 "
+                  }, {
+                      text: "Fire",
+                      icon: "🔥 "
+                  }
+                      ]} categoryIcon="🧊" categoryText="Kicthen Tool" title="Blender" pricing="Paid 4 ever" />
+                      </>
+              ))}
+
+              </div>
           </main>
       </BackgroundVideo>
   )
