@@ -6,6 +6,7 @@ export default defineConfig({
     plugins: [react()],
     server: {
         allowedHosts: [
+            'bible-urban-investor-driving.trycloudflare.com'
         ]
     }
 })
