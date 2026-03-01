@@ -1,0 +1,128 @@
+.card {
+    padding: 1.2rem 1.5rem 1.1rem 1.5rem;
+
+    color: #838383;
+
+    background: rgba(16, 16, 16, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border-radius: 30px;
+    border: 1px solid transparent;
+    box-shadow: inset -2px 2px 5px #000000,
+    inset 4px -4px 5px #555555;
+
+    width: 250px;
+    height: 300px;
+
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    hr{
+        width: 95%;
+    }
+}
+.card-outer{
+    padding: 0;
+    border-radius: 20px;
+    margin: 1rem;
+}
+/*.card-outer:hover {
+    box-shadow: 0 0 15px rgba(54, 188, 255, 1);
+    transition: 0.1s;
+    transition-delay: 0.1s;
+    scale: 1.01;
+
+    .card{
+        transition: 0.1s;
+        transition-delay: 0.1s;
+        box-shadow: inset -2px 2px 5px #000000,
+        inset 4px -4px 5px #415b5f;
+    }
+}*/
+
+.card .top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+
+    .logo {
+        height: 4rem;
+        width: 4rem;
+        border-radius: 20%;
+        overflow: clip;
+        border: 4px solid rgba(60, 60, 60, 0.62);
+
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: rgba(19, 19, 19);
+
+        }
+    }
+    .title {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        max-width: 60%;
+        >.text {
+            font-size: 2rem;
+            white-space: nowrap;
+            overflow: hidden;
+            font-weight: 600;
+        }
+    }
+}
+.card .tag {
+    color: #838383;
+    background-color: rgba(24, 24, 24, 0.60);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+
+    border: 1px solid transparent;
+    box-shadow: inset -2px 2px 5px #555555,
+    inset 4px -4px 5px #000000;
+
+
+    cursor: pointer;
+    border-radius: 999px;
+    font-weight: bold;
+
+    margin: 0;
+}
+
+.card .tags{
+    flex: 1;
+    padding: 0.5rem 0;
+}
+
+.card .tag.selected {
+    box-shadow: inset -2px 2px 5px rgba(21, 101, 192, 0.8),
+    inset 2px -2px 5px rgba(21, 101, 192, 0.8);
+}
+
+.card .bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+    padding: 0;
+    margin: 0;
+
+    .pricing{
+        font-weight: 600;
+        font-size: 1.4rem;
+        color: #587B4C;
+        padding-bottom: 0.1rem;
+        padding-left: 1%;
+    }
+    .link {
+        border-left: 2px solid #808080;
+        padding: 0.25rem 1rem 0 1rem;
+        margin-top: 0.25rem;
+    }
+}
+

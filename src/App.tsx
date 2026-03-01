@@ -5,6 +5,7 @@ import blade2 from './assets/blade2.mp4';
 import blade3 from './assets/Blade3_1080p.mp4';
 import blade4 from './assets/Blade4_1080p.mp4';
 import {useState} from "react";
+import Card from "./components/Card.tsx";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
       <BackgroundVideo src={videos[currentVideo]}>
           <main>
               <Search></Search>
+              <Card></Card>
           </main>
       </BackgroundVideo>
   )
