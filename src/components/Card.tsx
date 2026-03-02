@@ -7,6 +7,7 @@ interface CardProps {
     categoryIcon: string;
     tags: TagData[],
     pricing: string,
+    pricingColor: string,
     url: string,
 }
 
@@ -44,7 +45,7 @@ export default function Card(props: CardProps) {
                 </div>
                 <hr/>
                 <div className="bottom">
-                    <div className="pricing">
+                    <div className="pricing" style={{ color: props.pricingColor }}>
                         {props.pricing}
                     </div>
                     <div className="link" tabIndex={0} onClick={() => window.open(props.url, "_blank")}>
