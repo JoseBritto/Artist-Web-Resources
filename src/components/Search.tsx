@@ -2,8 +2,11 @@ import searchIcon from "../assets/icons/search.svg";
 import "./css/Search.css";
 import {useState} from "react";
 
-function Search() {
-
+export interface SearchProps {
+    searchText: string;
+    setSearchTerm:(term: string) => void
+}
+function Search(props: SearchProps) {
     const [filterAnimationResetKey, setFilterAnimationResetKey] = useState(0);
     const [filterOpen, setFilterOpen] = useState(false);
 
@@ -12,18 +15,13 @@ function Search() {
         setFilterAnimationResetKey(prevKey => prevKey + 1);
     };
 
-    /*useEffect(() => {
-        fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vScjvrdF1f9q1bM8WMFhohaOqAwudfNoyN4BCORkVM3nEcfEa4muQCqdC2u3XXNd-aqWoXywckEGBzm/pubhtml")
-        .then(res => res.text()).then(data => {
-            console.log(data);
-        });
-
-    }, []);*/
-
     return (
         <div className="search">
             <img src={searchIcon} alt="search" className="search-icon" />
-            <input type="search" placeholder="Search resources..." />
+            <input autoFocus={true} type="search" placeholder="Search resources..."
+                   onChange={x => props.setSearchTerm(x.target.value)}
+                   value={props.searchText}
+            />
             <button
                 onClick={() => {
                     setFilterOpen(!filterOpen);

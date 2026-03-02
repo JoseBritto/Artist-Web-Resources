@@ -24,6 +24,7 @@ function App() {
     const [data, setData] = useState<Site[]>();
     const [settings, setSettings] = useState<Map<string, TextSettings>>();
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
+    const [searchTerm, setSearchTerm] = useState<string>("");
 
     useEffect(() => {
         GetTextSettingsData()
@@ -31,6 +32,27 @@ function App() {
         GetResourceData()
             .then(x => setData(x));
     }, []);
+
+    function shouldShowCard (site: Site): boolean {
+        if(( selectedTags.length === 0 || (selectedTags.length > 0 && selectedTags.every(t => site.tags.includes(t))))) {
+            if(searchTerm) {
+                if(site.name.toLowerCase().includes(searchTerm.toLowerCase())){
+                    return true;
+                }
+                if(site.tags.some(t => t.toLowerCase().includes(searchTerm.toLowerCase()))){
+                    return true;
+                }
+                if(site.pricing.toLowerCase().includes(searchTerm.toLowerCase())) {
+                    return true;
+                }
+                return site.link.toLowerCase().includes(searchTerm.toLowerCase());
+
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
 
     function onTagSelect(tag: string): void {
         if(selectedTags.indexOf(tag) !== -1) {
@@ -43,11 +65,11 @@ function App() {
   return (
       <BackgroundVideo src={videos[currentVideo]}>
           <main>
-              <Search></Search>
+              <Search setSearchTerm={setSearchTerm} searchText={searchTerm}></Search>
 
               <div className="cards">
                   {data?.length && settings ? (
-                      data.map(x => ( selectedTags.length === 0 || (selectedTags.length > 0 && selectedTags.every(t => x.tags.includes(t))))&&(
+                      data.map(x => shouldShowCard(x) &&(
                           <Card
                               key={x.name}
                               url={x.link}
@@ -55,7 +77,7 @@ function App() {
                               pricing={x.pricing}
                               tags={x.tags.map(tag => ({
                                   text: tag,
-                                  icon: settings.get(tag)?.emoji ?? "❌",
+                                  icon: settings.get(tag)?.emoji ?? "",
                                   selected: selectedTags.includes(tag),
                                   onSelectCallback: onTagSelect
                               }))}
