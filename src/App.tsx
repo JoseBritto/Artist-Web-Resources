@@ -23,13 +23,22 @@ function App() {
     );
     const [data, setData] = useState<Site[]>();
     const [settings, setSettings] = useState<Map<string, TextSettings>>();
+    const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
     useEffect(() => {
         GetTextSettingsData()
             .then(x => setSettings(x));
         GetResourceData()
             .then(x => setData(x));
-    }, [])
+    }, []);
+
+    function onTagSelect(tag: string): void {
+        if(selectedTags.indexOf(tag) !== -1) {
+            setSelectedTags(selectedTags.filter((v) => v !== tag));
+        } else {
+            setSelectedTags((prevState) => [...prevState, tag]);
+        }
+    }
 
   return (
       <BackgroundVideo src={videos[currentVideo]}>
@@ -38,19 +47,19 @@ function App() {
 
               <div className="cards">
                   {data?.length && settings ? (
-                      data.map(x => (
+                      data.map(x => ( selectedTags.length === 0 || (selectedTags.length > 0 && selectedTags.every(t => x.tags.includes(t))))&&(
                           <Card
                               key={x.name}
                               url={x.link}
-                              categoryText={x.category}
                               title={x.name}
                               pricing={x.pricing}
                               tags={x.tags.map(tag => ({
                                   text: tag,
-                                  icon: settings?.get(tag)?.emoji ?? "❌"
+                                  icon: settings.get(tag)?.emoji ?? "❌",
+                                  selected: selectedTags.includes(tag),
+                                  onSelectCallback: onTagSelect
                               }))}
                               pricingColor={settings.get(x.pricing)?.color ?? "green"}
-                              categoryIcon={settings.get(x.category)?.emoji ?? "❌"}
                           />
                       ))
                   ) : (

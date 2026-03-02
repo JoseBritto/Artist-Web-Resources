@@ -1,19 +1,12 @@
 import "./css/Card.css";
-import Tag from "./Tag.tsx";
+import Tag, {type TagProps} from "./Tag.tsx";
 
 interface CardProps {
     title: string;
-    categoryText: string;
-    categoryIcon: string;
-    tags: TagData[],
+    tags: TagProps[],
     pricing: string,
     pricingColor: string,
     url: string,
-}
-
-interface TagData {
-    text: string;
-    icon: string;
 }
 
 export default function Card(props: CardProps) {
@@ -29,17 +22,14 @@ export default function Card(props: CardProps) {
                         {/*upto 13 characters - font should shrink to 0.5x*/}
                         {/*After 13 chars - text ...*/}
                         <div className="text">{props.title}</div>
-                        <button className="category tag">
-                            <span className="icon">{props.categoryIcon}</span>
-                            <span className="text">{props.categoryText}</span>
-                        </button>
+                        <Tag icon={props.tags[0].icon} text={props.tags[0].text} selected={props.tags[0].selected} onSelectCallback={props.tags[0].onSelectCallback} />
                     </div>
                 </div>
                 <hr/>
                 <div className="tags">
                     {props.tags.map((tag, i) => {
-                        return (
-                            <Tag key={i} icon={tag.icon} text={tag.text} />
+                        return ( i!== 0 &&
+                            <Tag key={i} icon={tag.icon} text={tag.text} selected={tag.selected} onSelectCallback={tag.onSelectCallback} />
                         );
                     })}
                 </div>

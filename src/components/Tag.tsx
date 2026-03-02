@@ -1,16 +1,15 @@
-import {useState} from "react";
-
-interface TagProps {
+export interface TagProps {
     text: string;
     icon: string;
+    selected: boolean;
+    onSelectCallback?: (tag: string) => void;
 }
 
 export default function Tag(props: TagProps) {
-    const [selected, setSelected] = useState<boolean>(false);
 
     return (
-        <button className={ `tag ${(selected ? 'selected' : '')}` }
-            onClick={() => setSelected(!selected)}
+        <button className={ `tag ${(props.selected ? 'selected' : '')}` }
+            onClick={() => props.onSelectCallback && props.onSelectCallback(props.text)}
         >
             <span className="icon">{props.icon}</span>
             <span className="text">{props.text}</span>
