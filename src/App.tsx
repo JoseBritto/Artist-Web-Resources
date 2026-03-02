@@ -85,7 +85,7 @@ function App() {
                           />
                       ))
                   ) : (
-                      "Loading..."
+                      <div className="loader"></div>
                   )}
 
               </div>

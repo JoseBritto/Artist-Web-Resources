@@ -10,7 +10,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    max-height: 100vh;
+    height: 100vh;
 }
 
 .cards {
@@ -23,4 +23,21 @@ main {
     align-items: flex-start;
     width: 95%;
     overflow: scroll;
+}
+
+
+.loader {
+    margin-top: 25%;
+    width: 15px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.87);
+    box-shadow: -20px 0px,20px 0px;
+    animation: l18 1s infinite;
+}
+@keyframes l18{
+    25%  {box-shadow: -20px -20px, 20px 20px}
+    50%  {box-shadow:   0px -20px,  0px 20px}
+    75%  {box-shadow:  20px -20px,-20px 20px}
+    100% {box-shadow:  20px   0px,-20px  0px}
 }
