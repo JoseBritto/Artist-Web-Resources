@@ -29,13 +29,12 @@ function App() {
     const [searchTerm, setSearchTerm] = useState<string>("");
 
     useEffect(() => {
-        let rData: Site[] = [];
         GetResourceData()
             .then(x => {
                 setData(x);
-                rData = x;
+                return x;
             })
-            .then(() => {
+            .then(rData => {
                 GetTextUrlDict()
                     .then(x => {
                        setData(rData.map(item => {
