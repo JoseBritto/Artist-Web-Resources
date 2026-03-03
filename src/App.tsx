@@ -37,10 +37,12 @@ function App() {
             .then(rData => {
                 GetTextUrlDict()
                     .then(x => {
-                       setData(rData.map(item => {
-                           item.link = x[item.name];
-                           return item;
-                       }));
+                        setData(
+                            rData.map(item => ({
+                                ...item,
+                                link: x[item.name]
+                            }))
+                        );
                     });
             });
 
