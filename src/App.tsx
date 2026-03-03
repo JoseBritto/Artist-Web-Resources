@@ -116,7 +116,7 @@ function App() {
               <Search setSearchTerm={setSearchTerm} searchText={searchTerm}></Search>
 
               <div className="cards">
-                  {filteredSites.length > 0 ? (
+                  {(data?.length ?? 0 > 0) ? (
                       filteredSites.map(x => (
                           <Card
                               key={x.name}
