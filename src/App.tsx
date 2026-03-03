@@ -130,9 +130,9 @@ function App() {
                               pricingColor={settings?.get(x.pricing)?.color ?? "#838383"}
                           />
                       ))
-                  ) : (
+                  ) : (searchTerm ? (<h2 className="no-results" style={{marginTop: "16%", color: "#838383"}}>No Results found</h2>) : (
                       <div className="loader"></div>
-                  )}
+                  ))}
 
               </div>
           </main>
