@@ -30,8 +30,6 @@ function App() {
 
     useEffect(() => {
         let rData: Site[] = [];
-        GetTextSettingsData()
-            .then(x => setSettings(x));
         GetResourceData()
             .then(x => {
                 setData(x);
@@ -46,6 +44,9 @@ function App() {
                        }));
                     });
             });
+
+        GetTextSettingsData()
+            .then(x => setSettings(x));
     }, []);
 
     const filteredByTags = useMemo(() => {
@@ -114,7 +115,7 @@ function App() {
               <Search setSearchTerm={setSearchTerm} searchText={searchTerm}></Search>
 
               <div className="cards">
-                  {filteredSites?.length ? (
+                  {filteredSites.length > 0 ? (
                       filteredSites.map(x => (
                           <Card
                               key={x.name}
