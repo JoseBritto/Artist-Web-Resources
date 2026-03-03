@@ -6,7 +6,7 @@ interface CardProps {
     tags: TagProps[],
     pricing: string,
     pricingColor: string,
-    url: string,
+    url?: string,
 }
 
 export default function Card(props: CardProps) {
@@ -15,7 +15,12 @@ export default function Card(props: CardProps) {
             <div className="card">
                 <div className="top">
                     <div className="logo">
-                        <img src={`https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${props.url}&size=64`} alt="Blender Logo"/>
+                        {
+                            props.url ?
+                            (<img src={`https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${props.url}&size=64`} alt={`${props.title} Logo`}/>)
+                            :
+                            (<img src="/favicon.ico" alt="Placeholder Logo"/>)
+                        }
                     </div>
                     <div className="title">
                         {/*9 character limit on title for same font size*/}

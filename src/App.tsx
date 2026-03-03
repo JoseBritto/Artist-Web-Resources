@@ -10,7 +10,7 @@ import Fuse from "fuse.js";
 
 import {
     GetResourceData,
-    GetTextSettingsData,
+    GetTextSettingsData, GetTextUrlDict,
     type Site,
     type TextSettings
 } from "./Helpers/DataHelper.ts";
@@ -29,10 +29,23 @@ function App() {
     const [searchTerm, setSearchTerm] = useState<string>("");
 
     useEffect(() => {
+        let rData: Site[] = [];
         GetTextSettingsData()
             .then(x => setSettings(x));
         GetResourceData()
-            .then(x => setData(x));
+            .then(x => {
+                setData(x);
+                rData = x;
+            })
+            .then(() => {
+                GetTextUrlDict()
+                    .then(x => {
+                       setData(rData.map(item => {
+                           item.link = x[item.name];
+                           return item;
+                       }));
+                    });
+            });
     }, []);
 
     const filteredByTags = useMemo(() => {
@@ -101,7 +114,7 @@ function App() {
               <Search setSearchTerm={setSearchTerm} searchText={searchTerm}></Search>
 
               <div className="cards">
-                  {filteredSites?.length && settings ? (
+                  {filteredSites?.length ? (
                       filteredSites.map(x => (
                           <Card
                               key={x.name}
@@ -110,11 +123,11 @@ function App() {
                               pricing={x.pricing}
                               tags={x.tags.map(tag => ({
                                   text: tag,
-                                  icon: settings.get(tag)?.emoji ?? "",
+                                  icon: settings?.get(tag)?.emoji ?? "",
                                   selected: selectedTags.includes(tag),
                                   onSelectCallback: onTagSelect
                               }))}
-                              pricingColor={settings.get(x.pricing)?.color ?? "green"}
+                              pricingColor={settings?.get(x.pricing)?.color ?? "#838383"}
                           />
                       ))
                   ) : (

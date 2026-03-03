@@ -27,12 +27,12 @@ export interface Site {
     name: string;
     tags: string[];
     pricing: string;
-    link: string;
+    link?: string;
 }
 
 export async function GetResourceData (sheetId: string = "2PACX-1vScjvrdF1f9q1bM8WMFhohaOqAwudfNoyN4BCORkVM3nEcfEa4muQCqdC2u3XXNd-aqWoXywckEGBzm") : Promise<Site[]> {
     const url = SHEETS_URL_START + sheetId + "/pub?output=csv";
-    const urlPromise = GetTextUrlDict(sheetId);
+    //const urlPromise = GetTextUrlDict(sheetId);
     const response = await fetch(url);
     if (!response.ok) {
         throw new Error(response.statusText);
@@ -42,20 +42,19 @@ export async function GetResourceData (sheetId: string = "2PACX-1vScjvrdF1f9q1bM
         header: true
     });
     const sites: Site[] = [];
-    const urlDict = await urlPromise;
+    //const urlDict = await urlPromise;
     data.data.forEach(d => {
         const site: Site = {
             name: "",
             tags: [],
-            pricing: "",
-            link: ""
+            pricing: ""
         }
         site.name = d["Site(Links)"];
         site.pricing = d["Price"];
         site.tags = (d["Resource"] as string).split(",");
         site.tags = site.tags.map(x => x.trim());
         site.tags = [d["Category"], ...site.tags];
-        site.link = urlDict[site.name].trim();
+        //site.link = urlDict[site.name].trim();
         sites.push(site);
     });
     return sites;
