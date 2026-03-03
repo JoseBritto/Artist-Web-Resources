@@ -4,8 +4,10 @@ import BackgroundVideo from "./components/BackgroundVideo.tsx";
 import blade2 from './assets/blade2.mp4';
 import blade3 from './assets/Blade3_1080p.mp4';
 import blade4 from './assets/Blade4_1080p.mp4';
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import Card from "./components/Card.tsx";
+import Fuse from "fuse.js";
+
 import {
     GetResourceData,
     GetTextSettingsData,
@@ -33,26 +35,57 @@ function App() {
             .then(x => setData(x));
     }, []);
 
-    function shouldShowCard (site: Site): boolean {
+    const filteredByTags = useMemo(() => {
+        if(!data) return [];
+        if (selectedTags.length === 0) return data;
+
+        return data.filter(site =>
+            selectedTags.every(tag =>
+                site.tags.includes(tag)
+            )
+        );
+    }, [data, selectedTags]);
+
+    const fuse = useMemo(() => {
+        return new Fuse(filteredByTags ?? [], {
+            keys: [
+                { name: "name", weight: 0.9 },
+                { name: "tags", weight: 0.7 },
+                { name: "pricing", weight: 0.6 },
+                { name: "link", weight: 0.2 },
+            ],
+            threshold: 0.5,
+            ignoreLocation: false
+        });
+    }, [filteredByTags]);
+
+    const filteredSites = useMemo(() => {
+        if (!searchTerm) return filteredByTags;
+        return fuse.search(searchTerm).map(r => r.item);
+    }, [searchTerm, fuse, filteredByTags]);
+
+/*    function shouldShowCard (site: Site): boolean {
         if(( selectedTags.length === 0 || (selectedTags.length > 0 && selectedTags.every(t => site.tags.includes(t))))) {
             if(searchTerm) {
-                if(site.name.toLowerCase().includes(searchTerm.toLowerCase())){
-                    return true;
-                }
-                if(site.tags.some(t => t.toLowerCase().includes(searchTerm.toLowerCase()))){
-                    return true;
-                }
-                if(site.pricing.toLowerCase().includes(searchTerm.toLowerCase())) {
-                    return true;
-                }
-                return site.link.toLowerCase().includes(searchTerm.toLowerCase());
-
+                /!*
+                * The below regex returns all sequences of letters, number and other non-whitespace chars
+                * \p{L}+ => sequences of letters (Unicode safe)
+                * \d+ => sequences of digits
+                * [^\s\p{L}\d] => any single non-whitespace character
+                * *!/
+                const terms = searchTerm.toLowerCase().match(/\p{L}+|\d+|[^\s\p{L}\d]/gu) ?? [];
+                return terms.some(x =>
+                    site.name.includes(x)
+                    || site.tags.some(t => t.toLowerCase().includes(x))
+                    || site.pricing.toLowerCase().includes(x)
+                    || site.link.toLowerCase().includes(x)
+                );
             } else {
                 return true;
             }
         }
         return false;
-    }
+    }*/
 
     function onTagSelect(tag: string): void {
         if(selectedTags.indexOf(tag) !== -1) {
@@ -68,8 +101,8 @@ function App() {
               <Search setSearchTerm={setSearchTerm} searchText={searchTerm}></Search>
 
               <div className="cards">
-                  {data?.length && settings ? (
-                      data.map(x => shouldShowCard(x) &&(
+                  {filteredSites?.length && settings ? (
+                      filteredSites.map(x => (
                           <Card
                               key={x.name}
                               url={x.link}
