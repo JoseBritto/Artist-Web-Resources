@@ -119,7 +119,7 @@ function App() {
               ></Search>
 
               <div className="cards">
-                  {(data?.length ?? 0 > 0) ? (
+                  {((data?.length ?? 0 > 0) && (filteredSites?.length ?? 0) > 0) ? (
                       filteredSites.map(x => (
                           <Card
                               key={x.name}
@@ -135,7 +135,7 @@ function App() {
                               pricingColor={settings?.get(x.pricing)?.color ?? "#838383"}
                           />
                       ))
-                  ) : (searchTerm ? (<h2 className="no-results" style={{marginTop: "16%", color: "#838383"}}>No Results found</h2>) : (
+                  ) : ((searchTerm || selectedTags.length > 0) ? (<h2 className="no-results" style={{marginTop: "16%", color: "#838383"}}>No Results found</h2>) : (
                       <div className="loader"></div>
                   ))}
 
