@@ -7,10 +7,12 @@
     border-radius: 999px;
     background: rgba(16, 16, 16, 0.75);
     color: var(--search-color);
-    backdrop-filter: blur(8px);
+    /*backdrop-filter: blur(8px);*/
     border: 1px solid rgba(60, 60, 60, 0.62);
     box-shadow: inset -2px 2px 5px #000000,
                 inset 4px -4px 5px #555555;
+    z-index: 1500;
+    position: relative;
 }
 
 .search input{
@@ -63,6 +65,7 @@
     gap: 4px;
     position: relative;
     padding-left: 46px;
+    z-index: 10;
 }
 
 .search .filter-btn:active, .search .filter-btn.open {
@@ -71,14 +74,21 @@
     box-shadow: inset -2px 2px 5px #000000,
     inset 4px -4px 5px #555555;
     border: 1px solid rgba(60, 60, 60, 0.40);
+
+    svg{
+        color: #1565C0;
+    }
 }
 
 .search .filter-btn svg{
-    color: #1565C0;
     position: absolute;
     top: 30%;
     left: 20px;
     scale: 1.2;
+}
+
+.search .filter-btn.colored svg {
+    color: #1565C0;
 }
 
 .search .filter-btn .glow{
@@ -88,4 +98,102 @@
     left: 20px;
     opacity: 0.5;
     filter: blur(1px);
+}
+
+.filter-popup {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24rem;
+    height: 32rem;
+    padding: 10px 10px 10px 10px;
+
+    color: #838383;
+    background: rgba(16, 16, 16, 0.75);
+    border-radius: 30px;
+    border: 1px solid rgba(60, 60, 60, 0.62);
+
+    backdrop-filter: blur(8px);
+
+    display: flex;
+    flex-direction: column;
+
+    button.filter-reset-btn {
+        padding: 16px 24px;
+        color: #838383;
+        background-color: rgba(24, 24, 24, 0.60);
+        outline: none;
+        font-size: 1.2rem;
+
+        cursor: pointer;
+        border-radius: 999px;
+        font-weight: bold;
+
+        border: 1px solid transparent;
+        box-shadow: inset -2px 2px 5px #555555,
+        inset 4px -4px 5px #000000;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 4px;
+        position: relative;
+    }
+
+    button.small-btn {
+        color: #838383;
+        background-color: rgba(24, 24, 24, 0.60);
+        padding: 0.5rem 0.75rem;
+
+        font-size: 1rem;
+        border: 1px solid transparent;
+        box-shadow: inset -2px 2px 5px #555555,
+        inset 4px -4px 5px #000000;
+        cursor: pointer;
+        border-radius: 999px;
+        font-weight: bold;
+    }
+
+
+    button:active, button.selected {
+        background-color: rgba(24, 24, 24, 0.0);
+        box-shadow: inset -2px 2px 5px #000000,
+        inset 4px -4px 5px #555555;
+        border: 1px solid rgba(60, 60, 60, 0.40);
+    }
+
+}
+
+.filter-popup .body{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+
+.filter-popup .body .container {
+
+    padding: 8px;
+    border-radius: 10px;
+    margin-top: 16px;
+    border: 1px solid rgba(60, 60, 60, 0.62);
+    .container-header{
+        cursor: pointer;
+    }
+    .container-content{
+        display: none;
+    }
+}
+
+.filter-popup .body .container.open {
+    .container-content {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 4px;
+        padding: 8px;
+        max-height: 60%;
+    }
 }

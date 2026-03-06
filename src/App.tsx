@@ -113,7 +113,10 @@ function App() {
   return (
       <BackgroundVideo src={videos[currentVideo]}>
           <main>
-              <Search setSearchTerm={setSearchTerm} searchText={searchTerm}></Search>
+              <Search setSearchTerm={setSearchTerm} searchText={searchTerm} data={data ?? []}
+                      settings={settings} selectedTags={selectedTags} setSelectedTags={setSelectedTags}
+                      onTagSelect={onTagSelect}
+              ></Search>
 
               <div className="cards">
                   {(data?.length ?? 0 > 0) ? (
