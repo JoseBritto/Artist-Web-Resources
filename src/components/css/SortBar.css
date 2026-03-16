@@ -1,0 +1,75 @@
+.sortbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    width: 90%;
+    padding: 4px 4px 12px;
+    margin-top: 8px;
+}
+
+.sortbar button {
+    margin-left: 16px;
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    font-family: "Inter", sans-serif;
+    color: #838383;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+
+    background: transparent;
+    height: 1.7rem;
+    width: 8rem;
+
+    border: 1px solid rgba(60, 60, 60, 0.40);
+    cursor: pointer;
+    box-shadow: inset -2px 2px 5px #555555,
+    inset 4px -4px 5px #000000;
+}
+
+.sortbar button:active, .sortbar button.active {
+    background-color: rgba(24, 24, 24, 0.0);
+    box-shadow: inset -2px 2px 5px #000000,
+    inset 2px -2px 5px #555555;
+}
+
+.sortbar svg{
+    scale: 0.8;
+    margin-left: -8px;
+    rotate: 180deg;
+}
+
+.sortbar select {
+    font-family: "Inter", sans-serif;
+    color: #838383;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    padding-left: 0.8rem;
+    padding-right: 0.4rem;
+
+    background: transparent;
+    height: 1.7rem;
+    width: 4.5rem;
+    margin: 0 16px;
+
+    border: 2px solid rgba(60, 60, 60, 0.40);
+    cursor: pointer;
+    /*box-shadow: inset -2px 2px 5px #555555,
+    inset 4px -4px 5px #000000;*/
+
+    outline: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    option {
+        text-align: center;
+    }
+}

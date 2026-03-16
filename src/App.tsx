@@ -14,6 +14,7 @@ import {
     type Site,
     type TextSettings
 } from "./Helpers/DataHelper.ts";
+import SortBar from "./components/SortBar.tsx";
 
 function App() {
 
@@ -117,6 +118,7 @@ function App() {
                       settings={settings} selectedTags={selectedTags} setSelectedTags={setSelectedTags}
                       onTagSelect={onTagSelect}
               ></Search>
+              <SortBar />
 
               <div className="cards">
                   {((data?.length ?? 0 > 0) && (filteredSites?.length ?? 0) > 0) ? (
