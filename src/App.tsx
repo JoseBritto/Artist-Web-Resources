@@ -111,29 +111,6 @@ function App() {
         return fuse.search(searchTerm).map(r => r.item);
     }, [searchTerm, fuse, filteredAndSortedSites]);
 
-/*    function shouldShowCard (site: Site): boolean {
-        if(( selectedTags.length === 0 || (selectedTags.length > 0 && selectedTags.every(t => site.tags.includes(t))))) {
-            if(searchTerm) {
-                /!*
-                * The below regex returns all sequences of letters, number and other non-whitespace chars
-                * \p{L}+ => sequences of letters (Unicode safe)
-                * \d+ => sequences of digits
-                * [^\s\p{L}\d] => any single non-whitespace character
-                * *!/
-                const terms = searchTerm.toLowerCase().match(/\p{L}+|\d+|[^\s\p{L}\d]/gu) ?? [];
-                return terms.some(x =>
-                    site.name.includes(x)
-                    || site.tags.some(t => t.toLowerCase().includes(x))
-                    || site.pricing.toLowerCase().includes(x)
-                    || site.link.toLowerCase().includes(x)
-                );
-            } else {
-                return true;
-            }
-        }
-        return false;
-    }*/
-
     function onTagSelect(tag: string): void {
         if(selectedTags.indexOf(tag) !== -1) {
             setSelectedTags(selectedTags.filter((v) => v !== tag));
