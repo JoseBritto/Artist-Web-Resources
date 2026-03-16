@@ -12,6 +12,8 @@ export interface SearchProps {
     setSelectedTags: (tags: string[]) => void;
     settings?: Map<string, TextSettings>;
     onTagSelect: (tag: string) => void;
+    selectedPricing: string[];
+    onPricingSelect: (pricing: string) => void;
 }
 function Search(props: SearchProps) {
     const [filterAnimationResetKey, setFilterAnimationResetKey] = useState(0);
@@ -31,14 +33,14 @@ function Search(props: SearchProps) {
         () => [...new Set(props.data?.flatMap(x => x.tags.slice(1)) ?? [])].sort(),
         [props.data]
     );
-    /*const prices = useMemo(
+    const prices = useMemo(
         () => [...new Set(props.data?.map(x => x.pricing) ?? [])],
         [props.data]
-    );*/
+    );
 
     const [categoriesOpen, setCategoriesOpen] = useState(true);
     const [tagsOpen, setTagsOpen] = useState(false);
-    /*const [pricingOpen, setPricingOpen] = useState(false);*/
+    const [pricingOpen, setPricingOpen] = useState(false);
 
     const ref = useRef<HTMLDivElement>(null);
     const btnRef = useRef<HTMLButtonElement>(null);
@@ -83,7 +85,7 @@ function Search(props: SearchProps) {
                                  onClick={() => {
                                      if(!categoriesOpen) {
                                          setTagsOpen(false);
-                                         /*setPricingOpen(false);*/
+                                         setPricingOpen(false);
                                      }
                                      setCategoriesOpen(!categoriesOpen);
                                  }}>
@@ -128,7 +130,7 @@ function Search(props: SearchProps) {
                                  onClick={() => {
                                      if(!tagsOpen) {
                                          setCategoriesOpen(false);
-                                         /*setPricingOpen(false);*/
+                                         setPricingOpen(false);
                                      }
                                      setTagsOpen(!tagsOpen);
                                  }}>
@@ -157,7 +159,7 @@ function Search(props: SearchProps) {
                             </div>
                         </div>
 
-                        {/*<div className={"pricing container " + (pricingOpen ? "open ": "")}>
+                        <div className={"pricing container " + (pricingOpen ? "open ": "")}>
                             <div className="container-header"
                                 onClick={() => {
                                     if(!pricingOpen) {
@@ -171,10 +173,25 @@ function Search(props: SearchProps) {
                             </div>
                             <div className="container-content">
                                 {prices.map((x, i) => (
-                                    <button key={i} className="small-btn">{props.settings?.get(x)?.emoji ?? ""}{x}</button>
+                                    <button key={i} className={"small-btn" +  (props.selectedPricing.includes(x) ? " selected" : "")}
+                                            onClick={() => {
+                                                props.onPricingSelect(x);
+                                            }}>
+                                        {props.settings?.get(x)?.emoji ?? ""}{x}
+                                    </button>
                                 ))}
                             </div>
-                        </div>*/}
+                            <div className="container-content selected-container">
+                                {prices.filter(x => props.selectedPricing.includes(x)).map((x, i) => (
+                                    <button key={i} className={"small-btn" +  (props.selectedPricing.includes(x) ? " selected" : "")}
+                                            onClick={() => {
+                                                props.onPricingSelect(x);
+                                            }}>
+                                        {props.settings?.get(x)?.emoji ?? ""}{x}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}

@@ -27,6 +27,7 @@ function App() {
     const [data, setData] = useState<Site[]>();
     const [settings, setSettings] = useState<Map<string, TextSettings>>();
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
+    const [selectedPricing, setSelectedPricing] = useState<string[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [freeFirst, setFreeFirst] = useState<boolean>(false);
     const [aZ, setAZ] = useState<boolean>(true);
@@ -55,14 +56,24 @@ function App() {
 
     const filteredByTags = useMemo(() => {
         if(!data) return [];
-        if (selectedTags.length === 0) return data;
-
+        if (selectedTags.length === 0) {
+            if(selectedPricing.length === 0)
+                return data;
+            return data.filter(site => selectedPricing.includes(site.pricing));
+        }
+        if(selectedPricing.length === 0) {
+            return data.filter(site =>
+                selectedTags.every(tag =>
+                    site.tags.includes(tag)
+                )
+            );
+        }
         return data.filter(site =>
             selectedTags.every(tag =>
                 site.tags.includes(tag)
             )
-        );
-    }, [data, selectedTags]);
+        ).filter(site => selectedPricing.includes(site.pricing));
+    }, [data, selectedTags, selectedPricing]);
 
     const filteredAndSortedSites = useMemo(() => {
         const list = [...filteredByTags];
@@ -131,12 +142,22 @@ function App() {
         }
     }
 
+    function onPricingSelect(price: string): void {
+        if(selectedPricing.indexOf(price) !== -1) {
+            setSelectedPricing(selectedPricing.filter((v) => v !== price));
+        } else {
+            setSelectedPricing((prevState) => [...prevState, price]);
+        }
+    }
+
   return (
       <BackgroundVideo src={videos[currentVideo]}>
           <main>
               <Search setSearchTerm={setSearchTerm} searchText={searchTerm} data={data ?? []}
                       settings={settings} selectedTags={selectedTags} setSelectedTags={setSelectedTags}
                       onTagSelect={onTagSelect}
+                      selectedPricing={selectedPricing}
+                      onPricingSelect={onPricingSelect}
               ></Search>
               <SortBar freeFirst={freeFirst} setFreeFirst={setFreeFirst} aZ={aZ} setAZ={setAZ} />
 
