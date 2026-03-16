@@ -28,6 +28,8 @@ function App() {
     const [settings, setSettings] = useState<Map<string, TextSettings>>();
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>("");
+    const [freeFirst, setFreeFirst] = useState<boolean>(false);
+    const [aZ, setAZ] = useState<boolean>(true);
 
     useEffect(() => {
         GetResourceData()
@@ -62,8 +64,26 @@ function App() {
         );
     }, [data, selectedTags]);
 
+    const filteredAndSortedSites = useMemo(() => {
+        const list = [...filteredByTags];
+
+        return list.sort((a, b) => {
+            if (freeFirst) {
+                const aFree = a.pricing === "Free";
+                const bFree = b.pricing === "Free";
+
+                if (aFree !== bFree) {
+                    return aFree ? -1 : 1;
+                }
+            }
+
+            const cmp = a.name.localeCompare(b.name);
+            return aZ ? cmp : -cmp;
+        });
+    }, [filteredByTags, freeFirst, aZ]);
+
     const fuse = useMemo(() => {
-        return new Fuse(filteredByTags ?? [], {
+        return new Fuse(filteredAndSortedSites ?? [], {
             keys: [
                 { name: "name", weight: 0.9 },
                 { name: "tags", weight: 0.7 },
@@ -73,12 +93,12 @@ function App() {
             threshold: 0.5,
             ignoreLocation: false
         });
-    }, [filteredByTags]);
+    }, [filteredAndSortedSites]);
 
     const filteredSites = useMemo(() => {
-        if (!searchTerm) return filteredByTags;
+        if (!searchTerm) return filteredAndSortedSites;
         return fuse.search(searchTerm).map(r => r.item);
-    }, [searchTerm, fuse, filteredByTags]);
+    }, [searchTerm, fuse, filteredAndSortedSites]);
 
 /*    function shouldShowCard (site: Site): boolean {
         if(( selectedTags.length === 0 || (selectedTags.length > 0 && selectedTags.every(t => site.tags.includes(t))))) {
@@ -118,7 +138,7 @@ function App() {
                       settings={settings} selectedTags={selectedTags} setSelectedTags={setSelectedTags}
                       onTagSelect={onTagSelect}
               ></Search>
-              <SortBar />
+              <SortBar freeFirst={freeFirst} setFreeFirst={setFreeFirst} aZ={aZ} setAZ={setAZ} />
 
               <div className="cards">
                   {((data?.length ?? 0 > 0) && (filteredSites?.length ?? 0) > 0) ? (
