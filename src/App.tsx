@@ -158,6 +158,7 @@ function App() {
                       onTagSelect={onTagSelect}
                       selectedPricing={selectedPricing}
                       onPricingSelect={onPricingSelect}
+                      setSelectedPricing={setSelectedPricing}
               ></Search>
               <SortBar freeFirst={freeFirst} setFreeFirst={setFreeFirst} aZ={aZ} setAZ={setAZ} />
 
