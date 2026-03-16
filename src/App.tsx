@@ -145,7 +145,9 @@ function App() {
                       onPricingSelect={onPricingSelect}
                       setSelectedPricing={setSelectedPricing}
               ></Search>
-              <SortBar freeFirst={freeFirst} setFreeFirst={setFreeFirst} aZ={aZ} setAZ={setAZ} />
+              {searchTerm.trim().length === 0 &&
+                <SortBar freeFirst={freeFirst} setFreeFirst={setFreeFirst} aZ={aZ} setAZ={setAZ} />
+              }
 
               <div className="cards">
                   {((data?.length ?? 0 > 0) && (filteredSites?.length ?? 0) > 0) ? (
