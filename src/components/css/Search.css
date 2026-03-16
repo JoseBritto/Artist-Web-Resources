@@ -209,3 +209,68 @@
         display: none;
     }
 }
+
+@media (max-width: 750px) {
+    .search {
+        width: 80%;
+        font-size: 0.5rem;
+        padding: 8px;
+        >img{
+            height: 16px;
+            width: 16px;
+        }
+    }
+    .search input{
+        font-size: 0.8rem;
+        height: 1rem;
+        padding: 0 0.5rem;
+    }
+    .search .filter-btn {
+        font-size: 0.8rem;
+        gap: 2px;
+        position: relative;
+        padding: 10px 20px 10px 29px;
+        z-index: 10;
+        svg{
+            height: 12px;
+            width: 12px;
+            position: absolute;
+            top: 35%;
+            left: 14px;
+        }
+        svg.glow{
+            position: absolute;
+            top: 35%;
+            left: 14px;
+            scale: 1.4;
+        }
+    }
+
+    .filter-popup {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 60vw;
+        max-width: 18rem;
+        padding: 10px 10px 32px 10px;
+
+        button.filter-reset-btn {
+            padding: 10px 12px;
+            font-size: 0.8rem;
+            svg {
+                height: 12px;
+                width: 12px;
+            }
+        }
+        button.small-btn {
+            padding: 0.3rem 0.5rem;
+            font-size: 0.7rem;
+            margin: 1px;
+        }
+
+        .container-header{
+            font-size: 1.4em;
+        }
+
+    }
+}
