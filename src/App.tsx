@@ -78,14 +78,22 @@ function App() {
     const filteredAndSortedSites = useMemo(() => {
         const list = [...filteredByTags];
 
+        const pricingOrder: Record<string, number> = {
+            "Free": 0,
+            "Mostly Free": 10,
+            "Balanced": 20,
+            "Mostly Paid": 30,
+            "Paid": 40,
+            "Subscription": 50
+        };
+
         return list.sort((a, b) => {
             if (freeFirst) {
-                const aFree = a.pricing === "Free";
-                const bFree = b.pricing === "Free";
+                const priceCmp =
+                    (pricingOrder[a.pricing] ?? 999) -
+                    (pricingOrder[b.pricing] ?? 999);
 
-                if (aFree !== bFree) {
-                    return aFree ? -1 : 1;
-                }
+                if (priceCmp !== 0) return priceCmp;
             }
 
             const cmp = a.name.localeCompare(b.name);
