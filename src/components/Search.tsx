@@ -106,6 +106,22 @@ function Search(props: SearchProps) {
                                     </button>
                                 ))}
                             </div>
+                            <div className="container-content selected-container">
+                                {categories.filter(x => props.selectedTags.includes(x)).slice(0, 6).map((x, i) => (
+                                    <button key={i} className={"small-btn " + (props.selectedTags.includes(x) ? " selected" : "")}
+                                            onClick={() => {
+                                                props.selectedTags.forEach(item => {
+                                                    //Deselect any selected categories first!
+                                                    if (x !== item && categories.includes(item)){
+                                                        props.onTagSelect(item);
+                                                    }
+                                                })
+                                                props.onTagSelect(x);
+                                            }}>
+                                        {props.settings?.get(x)?.emoji ?? ""}{x}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
                         <div className={"tags container " + (tagsOpen ? "open ": "")}>
                             <div className="container-header"
@@ -125,6 +141,16 @@ function Search(props: SearchProps) {
                                         onClick={() => {
                                             props.onTagSelect(x);
                                         }}>
+                                        {props.settings?.get(x)?.emoji ?? ""}{x}
+                                    </button>
+                                ))}
+                            </div>
+                            <div className="container-content selected-container">
+                                {tags.filter(x => props.selectedTags.includes(x)).slice(0, 6).map((x, i) => (
+                                    <button key={i} className={"small-btn " + (props.selectedTags.includes(x) ? " selected" : "")}
+                                            onClick={() => {
+                                                props.onTagSelect(x);
+                                            }}>
                                         {props.settings?.get(x)?.emoji ?? ""}{x}
                                     </button>
                                 ))}

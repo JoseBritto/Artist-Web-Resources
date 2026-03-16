@@ -184,6 +184,15 @@
     .container-content{
         display: none;
     }
+    .container-content.selected-container{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 4px;
+        padding: 0;
+        max-height: 60%;
+    }
 }
 
 .filter-popup .body .container.open {
@@ -195,5 +204,8 @@
         gap: 4px;
         padding: 8px;
         max-height: 60%;
+    }
+    .container-content.selected-container {
+        display: none;
     }
 }
