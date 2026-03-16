@@ -36,6 +36,7 @@
     background-color: rgba(24, 24, 24, 0.0);
     box-shadow: inset -2px 2px 5px #000000,
     inset 2px -2px 5px #555555;
+    color: #2e86e8;
 }
 
 .sortbar svg{
