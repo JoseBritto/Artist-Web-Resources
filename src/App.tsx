@@ -15,6 +15,7 @@ import {
     type TextSettings
 } from "./Helpers/DataHelper.ts";
 import SortBar from "./components/SortBar.tsx";
+import Contact from "./components/Contact.tsx";
 
 function App() {
 
@@ -138,14 +139,16 @@ function App() {
   return (
       <BackgroundVideo src={videos[currentVideo]}>
           <main>
-              <Search setSearchTerm={setSearchTerm} searchText={searchTerm} data={data ?? []}
-                      settings={settings} selectedTags={selectedTags} setSelectedTags={setSelectedTags}
-                      onTagSelect={onTagSelect}
-                      selectedPricing={selectedPricing}
-                      onPricingSelect={onPricingSelect}
-                      setSelectedPricing={setSelectedPricing}
-              ></Search>
-              <SortBar freeFirst={freeFirst} setFreeFirst={setFreeFirst} aZ={aZ} setAZ={setAZ} hidden={searchTerm.trim().length !== 0}/>
+              <div className="app-top">
+                  <Search setSearchTerm={setSearchTerm} searchText={searchTerm} data={data ?? []}
+                          settings={settings} selectedTags={selectedTags} setSelectedTags={setSelectedTags}
+                          onTagSelect={onTagSelect}
+                          selectedPricing={selectedPricing}
+                          onPricingSelect={onPricingSelect}
+                          setSelectedPricing={setSelectedPricing}
+                  ></Search>
+                  <SortBar freeFirst={freeFirst} setFreeFirst={setFreeFirst} aZ={aZ} setAZ={setAZ} hidden={searchTerm.trim().length !== 0}/>
+              </div>
 
               <div className="cards">
                   {((data?.length ?? 0 > 0) && (filteredSites?.length ?? 0) > 0) ? (

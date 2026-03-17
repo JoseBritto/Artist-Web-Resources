@@ -6,6 +6,7 @@
     width: 90%;
     padding: 4px 4px 12px;
     margin-top: 8px;
+    z-index: 1000;
 }
 
 .sortbar button {

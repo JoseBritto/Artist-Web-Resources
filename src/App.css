@@ -10,7 +10,51 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: 100vh;
+    min-height: 100vh;
+    position: relative;
+
+    isolation: isolate;
+}
+
+.app-top{
+    width: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: sticky;
+    top: 24px;
+    z-index: 10000;
+    isolation: isolate;
+}
+/*.app-top::before{
+    content: "";
+    display: block;
+    position: absolute;
+    top: -50px;
+    left: 0;
+    height: 180px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 500;
+}*/
+
+/* actual clipping layer */
+main::before {
+    width: 100%;
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 180px;
+
+    /* transparent glass, not solid */
+    background: linear-gradient(to bottom, rgba(16, 16, 16, 0.74), rgba(16, 16, 16, 0.0));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    mask-image: linear-gradient(to top, transparent 20%, rgba(0, 0, 0, 0.8) 10%, black 100%, transparent 100%);
+    z-index: 500;
 }
 
 .cards {
