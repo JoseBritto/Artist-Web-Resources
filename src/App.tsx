@@ -173,6 +173,7 @@ function App() {
 
               </div>
           </main>
+          <Contact />
       </BackgroundVideo>
   )
 }

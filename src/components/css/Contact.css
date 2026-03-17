@@ -1,0 +1,113 @@
+.contact{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 95%;
+    font-size: 1.2rem;
+    color: #838383;
+    text-align: center;
+    font-weight: 600;
+    padding: 0 1rem;
+    margin: 0;
+
+    a {
+        text-decoration: none;
+        color: #c2c2c2;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+
+    hr{
+        width: 100%;
+        color: rgba(67, 67, 67, 0.58);
+    }
+    p{
+        font-size: 1rem;
+    }
+    form {
+        width: 60%;
+        padding: 0;
+    }
+    textarea{
+        width: calc(100% - 2.2rem);
+        height: 90px;
+        padding: 1rem;
+        border-radius: 15px;
+
+        background: rgba(16, 16, 16, 0.75);
+        color: var(--search-color);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(60, 60, 60, 0.62);
+        box-shadow: inset -2px 2px 5px #000000,
+        inset 4px -4px 5px #555555;
+
+        outline: none;
+        background: none;
+        font-weight: bold;
+        font-size: 1rem;
+        resize: none;
+    }
+    fieldset{
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        padding: 1rem 0;
+    }
+    input {
+        outline: none;
+        width: 100%;
+        resize: none;
+        font-family: "Inter", Avenir, Helvetica, Arial, sans-serif;
+
+        padding: 0.8rem 1.6rem;
+        border-radius: 15px;
+
+        background: rgba(16, 16, 16, 0.75);
+        color: var(--search-color);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(60, 60, 60, 0.62);
+        box-shadow: inset -2px 2px 5px #000000,
+        inset 4px -4px 5px #555555;
+        background: none;
+        font-weight: bold;
+        font-size: 1rem;
+
+    }
+
+    button {
+        padding: 16px 32px;
+        color: #838383;
+        background-color: rgba(24, 24, 24, 0.60);
+        outline: none;
+        font-size: 1rem;
+
+        cursor: pointer;
+        border-radius: 999px;
+        font-weight: bold;
+
+        border: 1px solid transparent;
+        box-shadow: inset -2px 2px 5px #555555,
+        inset 4px -4px 5px #000000;
+    }
+
+    @media (max-width: 800px) {
+        align-items: center;
+        form {
+            width: 90%;
+        }
+        input, textarea, button {
+            font-size: 0.8rem;
+        }
+        input:nth-child(2) {
+            display: none;
+        }
+        textarea {
+            height: 120px;
+        }
+    }
+}
