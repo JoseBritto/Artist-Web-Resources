@@ -20,6 +20,21 @@ html, body {
     font-family: "Inter", serif;
     line-height: 1.5;
     font-weight: 400;
+
+    /* Hide scrollbar for Chrome, Safari, Edge */
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide scrollbar for Firefox */
+    * {
+        scrollbar-width: none; /* Firefox */
+    }
+
+    /* Hide scrollbar for IE, Edge (old) */
+    * {
+        -ms-overflow-style: none;
+    }
 }
 
 #root {

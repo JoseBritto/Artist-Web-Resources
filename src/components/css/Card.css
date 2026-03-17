@@ -20,6 +20,9 @@
     margin: 0;
     hr{
         width: 95%;
+        background: #838383;
+        border: none;
+        height: 1px;
     }
 
     font-size: 1rem;
