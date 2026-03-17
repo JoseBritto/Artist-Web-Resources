@@ -44,7 +44,7 @@ main {
 
 @media (max-width: 750px) {
     .cards {
-        max-width: 99%;
+        width: 100%;
     }
     main {
         padding-right: 0;
