@@ -19,10 +19,7 @@ export default function SideBar(props: SideBarProps) {
         () => [...new Set(props.data?.map(x => x.tags[0]) ?? [])],
         [props.data]
     );
-    const prices = useMemo(
-        () => [...new Set(props.data?.map(x => x.pricing) ?? [])],
-        [props.data]
-    );
+    const prices = ["Free", "Mostly Free", "Balanced", "Mostly Paid", "Paid", "Subscription"];
 
     return (
         <aside className="sidebar">
