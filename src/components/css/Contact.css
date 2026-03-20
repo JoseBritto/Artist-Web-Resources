@@ -177,6 +177,7 @@ footer .contact{
         margin: 0 auto;
     }
     #coffee {
-        margin: 0 12%;
+        margin-bottom: 4rem;
+        margin-top: 1rem;
     }
 }
