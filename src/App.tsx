@@ -16,6 +16,7 @@ import {
 } from "./Helpers/DataHelper.ts";
 import SortBar from "./components/SortBar.tsx";
 import Contact from "./components/Contact.tsx";
+import SideBar from "./components/SideBar.tsx";
 
 function App() {
 
@@ -149,6 +150,15 @@ function App() {
                   ></Search>
                   <SortBar freeFirst={freeFirst} setFreeFirst={setFreeFirst} aZ={aZ} setAZ={setAZ} hidden={searchTerm.trim().length !== 0}/>
               </div>
+
+              <SideBar data={data ?? []} settings={settings}
+                       selectedTags={selectedTags}
+                       setSelectedTags={setSelectedTags}
+                       onTagSelect={onTagSelect}
+                       selectedPricing={selectedPricing}
+                       onPricingSelect={onPricingSelect}
+                       setSelectedPricing={setSelectedPricing}
+              />
 
               <div className="cards">
                   {((data?.length ?? 0 > 0) && (filteredSites?.length ?? 0) > 0) ? (
