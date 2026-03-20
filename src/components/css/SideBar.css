@@ -1,5 +1,5 @@
 aside.sidebar {
-    position: fixed;
+    position: absolute;
     left: 16px;
     top: 150px;
     padding: 0;
@@ -44,8 +44,8 @@ section.sidebar-section {
         gap: 2px;
         width: 100%;
         padding-top: 0.8rem;
-        max-height: 28vh;
-        overflow-y: scroll;
+        /*max-height: 28vh;*/
+        /*overflow-y: scroll;*/
 
         button {
             border: 1px solid transparent;
@@ -55,7 +55,7 @@ section.sidebar-section {
             padding: 0.5rem 1rem;
             width: 100%;
 
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: 800;
 
             color: #838383;
