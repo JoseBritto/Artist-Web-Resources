@@ -172,4 +172,11 @@ footer .contact{
         flex-direction: column-reverse;
         gap: 2rem;
     }
+
+    footer .follow {
+        margin: 0 auto;
+    }
+    #coffee {
+        margin: 0 12%;
+    }
 }
