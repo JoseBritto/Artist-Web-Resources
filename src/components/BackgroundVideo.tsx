@@ -26,7 +26,7 @@ export default function BackgroundVideo({
                 loop
                 muted
                 playsInline
-                preload="metadata"
+                preload="none"
             />
 
             <div className='bgOverlay' />
