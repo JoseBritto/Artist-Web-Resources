@@ -25,12 +25,10 @@ html, body {
     ::-webkit-scrollbar {
         display: none;
     }
-
     /* Hide scrollbar for Firefox */
     * {
         scrollbar-width: none; /* Firefox */
     }
-
     /* Hide scrollbar for IE, Edge (old) */
     * {
         -ms-overflow-style: none;
